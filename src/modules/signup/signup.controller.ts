@@ -7,9 +7,9 @@ import { UpdateSignupDto } from './dto/update-signup.dto';
 export class SignupController {
   constructor(private readonly signupService: SignupService) {}
 
-  @Post()
+  @Post('/')
   create(@Body() createSignupDto: CreateSignupDto) {
-    return this.signupService.create(createSignupDto);
+    return this.signupService.create(createSignupDto.singUp);
   }
 
   @Get()
@@ -17,18 +17,18 @@ export class SignupController {
     return this.signupService.findAll();
   }
 
-  @Get(':id')
+  @Get('/:id')
   findOne(@Param('id') id: string) {
-    return this.signupService.findOne(+id);
+    return this.signupService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSignupDto: UpdateSignupDto) {
-    return this.signupService.update(+id, updateSignupDto);
+    return this.signupService.update(id, updateSignupDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.signupService.remove(+id);
+    return this.signupService.remove(id);
   }
 }

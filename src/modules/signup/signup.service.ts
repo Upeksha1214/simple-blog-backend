@@ -4,6 +4,7 @@ import { UpdateSignupDto } from './dto/update-signup.dto';
 import { SignUp, SignUpDocument } from 'src/schemas/signup_form.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import ISignupForm from 'src/interfaces/user_signup_form.interface';
 
 
 @Injectable()
@@ -13,23 +14,26 @@ export class SignupService {
     private signUpModel:Model<SignUpDocument>
   ){}
 
-  async create(createSignupDto: CreateSignupDto) {
-    return await new this.signUpModel(createSignupDto).save(); 
+  async create(signUp: ISignupForm) {
+    return await new this.signUpModel(signUp).save(); 
   }
 
-  findAll() {
-    return `This action returns all signup`;
+  async findAll() {
+    return await this.signUpModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} signup`;
+  async findOne(id: string) {
+    return await this.signUpModel.findById(id);
   }
 
-  update(id: number, updateSignupDto: UpdateSignupDto) {
-    return `This action updates a #${id} signup`;
+  async update(id: string, updateSignupDto: UpdateSignupDto) {
+    return await this.signUpModel.findByIdAndUpdate(
+      id,
+      updateSignupDto.singUp
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} signup`;
+  async remove(id: string) {
+    return await this.signUpModel.findByIdAndRemove(id);
   }
 }
