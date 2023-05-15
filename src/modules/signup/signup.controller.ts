@@ -19,7 +19,7 @@ export class SignupController {
 
   @Get('/:username')
   findOne(@Param('name') username: string) {
-    return this.signupService.getStudentByUsername(username);
+    return this.signupService.getByUsername(username);
   }
 
   @Patch(':id')
