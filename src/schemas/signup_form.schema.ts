@@ -1,25 +1,25 @@
 import { MongooseModule, Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
-import ISignupForm from "src/interfaces/user_signup_form.interface";
+
 
 export type SignUpDocument = HydratedDocument<SignUp>
 
 @Schema({ collection: 'blog-signUp' })
-export class SignUp implements ISignupForm{
+export class SignUp {
 
-    @Prop({ required:true })
+    @Prop({})
     fullName: string;
 
     @Prop({ required:true })
     username: string;
 
-    @Prop({ required:true })
+    @Prop({})
     phoneNumber: string;
 
-    @Prop({ required:true })
+    @Prop({})
     email: string;
 
-    @Prop({ required:true })
+    @Prop({})
     password: string;
 
 }

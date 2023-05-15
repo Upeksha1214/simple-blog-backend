@@ -4,7 +4,8 @@ import { UpdateSignupDto } from './dto/update-signup.dto';
 import { SignUp, SignUpDocument } from 'src/schemas/signup_form.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import ISignupForm from 'src/interfaces/user_signup_form.interface';
+const bcrypt = require('bcrypt');
+
 
 
 @Injectable()
@@ -14,16 +15,32 @@ export class SignupService {
     private signUpModel:Model<SignUpDocument>
   ){}
 
-  async create(signUp: ISignupForm) {
-    return await new this.signUpModel(signUp).save(); 
+  async createUser(requestDto:CreateSignupDto) {
+    const { password } =requestDto.singUp;
+    try{
+      const encryptedPassword = await bcrypt.hash(password,10);
+      const saveUser = await new this.signUpModel({
+        ...requestDto,
+        password:encryptedPassword
+      }).save();
+
+      // Password should not be returned
+      const { email, _id, } = saveUser;
+
+      return Object.freeze({ email, _id });
+
+    }catch(exception){
+      console.log(exception)
+    }
+     
   }
 
   async findAll() {
     return await this.signUpModel.find();
   }
 
-  async findOne(id: string) {
-    return await this.signUpModel.findById(id);
+  async getStudentByUsername(username:string) {
+    return await this.signUpModel.findOne({email:username});
   }
 
   async update(id: string, updateSignupDto: UpdateSignupDto) {

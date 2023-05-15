@@ -9,7 +9,7 @@ export class SignupController {
 
   @Post('/')
   create(@Body() createSignupDto: CreateSignupDto) {
-    return this.signupService.create(createSignupDto.singUp);
+    return this.signupService.createUser(createSignupDto);
   }
 
   @Get()
@@ -17,9 +17,9 @@ export class SignupController {
     return this.signupService.findAll();
   }
 
-  @Get('/:id')
-  findOne(@Param('id') id: string) {
-    return this.signupService.findOne(id);
+  @Get('/:username')
+  findOne(@Param('name') username: string) {
+    return this.signupService.getStudentByUsername(username);
   }
 
   @Patch(':id')
