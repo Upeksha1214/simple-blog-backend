@@ -8,8 +8,8 @@ export class SignupController {
   constructor(private readonly signupService: SignupService) {}
 
   @Post('/')
-  create(@Body() createSignupDto: CreateSignupDto) {
-    return this.signupService.createUser(createSignupDto);
+  async create(@Body() createSignupDto: CreateSignupDto) {
+    return await this.signupService.createUser(createSignupDto);
   }
 
   @Get()

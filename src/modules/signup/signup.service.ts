@@ -17,7 +17,7 @@ export class SignupService {
 
   async createUser(requestDto:CreateSignupDto) {
     const { password } =requestDto.singUp;
-    try{
+    try{ 
       const encryptedPassword = await bcrypt.hash(password,10);
       const saveUser = await new this.signUpModel({
         ...requestDto,
@@ -39,7 +39,7 @@ export class SignupService {
     return await this.signUpModel.find();
   }
 
-  async getStudentByUsername(username:string) {
+  async getByUsername(username:string) {
     return await this.signUpModel.findOne({email:username});
   }
 

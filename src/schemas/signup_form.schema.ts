@@ -7,19 +7,19 @@ export type SignUpDocument = HydratedDocument<SignUp>
 @Schema({ collection: 'blog-signUp' })
 export class SignUp {
 
-    @Prop({})
+    @Prop()
     fullName: string;
 
-    @Prop({ required:true })
+    @Prop()
     username: string;
 
-    @Prop({})
+    @Prop()
     phoneNumber: string;
 
-    @Prop({})
+    @Prop()
     email: string;
 
-    @Prop({})
+    @Prop()
     password: string;
 
 }

@@ -1,0 +1,1 @@
+export const USER_JWT_EXPIRE_TIME = 1;
