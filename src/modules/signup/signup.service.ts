@@ -20,7 +20,7 @@ export class SignupService {
     try{ 
       const encryptedPassword = await bcrypt.hash(password,10);
       const saveUser = await new this.signUpModel({
-        ...requestDto,
+        ...requestDto.singUp,
         password:encryptedPassword
       }).save();
   
@@ -41,7 +41,7 @@ export class SignupService {
   }
 
   async getByUsername(username:string) {
-    return await this.signUpModel.findOne({email:username});
+    return await this.signUpModel.findOne({username:username});
   }
 
   async update(id: string, updateSignupDto: UpdateSignupDto) {

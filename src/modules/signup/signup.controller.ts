@@ -12,9 +12,9 @@ export class SignupController {
     return await this.signupService.createUser(createSignupDto);
   }
 
-  @Get()
+  @Get('/')
   findAll() {
-    return this.signupService.findAll();
+   return this.signupService.findAll();
   }
 
   @Get('/:username')
