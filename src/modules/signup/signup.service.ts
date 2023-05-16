@@ -23,17 +23,18 @@ export class SignupService {
         ...requestDto,
         password:encryptedPassword
       }).save();
-
+  
       // Password should not be returned
       const { email, _id, } = saveUser;
-
+  
       return Object.freeze({ email, _id });
-
+  
     }catch(exception){
       console.log(exception)
     }
-     
-  }
+       
+    }
+  
 
   async findAll() {
     return await this.signUpModel.find();
