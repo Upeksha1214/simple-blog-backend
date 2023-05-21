@@ -22,9 +22,9 @@ export class PostController {
     return this.postService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postService.update(id, updatePostDto);
+  @Patch(':userName')
+  update(@Param('userName') user: string, @Body() updatePostDto: UpdatePostDto) {
+    return this.postService.update(user, updatePostDto);
   }
 
   @Delete(':id')

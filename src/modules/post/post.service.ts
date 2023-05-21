@@ -22,18 +22,21 @@ export class PostService {
     return await this.postModel.find();
   }
 
-  async findOne(id: string) {
-    return await this.postModel.findById(id);
+  async findOne(authorName:string) {
+    return await this.postModel.findOne({authorName});
   }
 
   async update(id:string, updatePostDto: UpdatePostDto) {
-    return await this.postModel.findByIdAndUpdate(
-      id,
-      updatePostDto.post
+    const data= await this.postModel.findOne(
+      {authorName:id},
     );
+    return this.postModel.findByIdAndUpdate(data._id,updatePostDto.post)
   }
 
   async remove(id: string) {
-    return await this.postModel.findByIdAndRemove(id);
+    const data= await this.postModel.findOne(
+      {authorName:id},
+    );
+    return await this.postModel.findByIdAndRemove(data._id);
   }
 }

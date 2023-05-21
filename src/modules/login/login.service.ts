@@ -14,6 +14,10 @@ export class LoginService {
     console.log(user)
     const result = await bcrypt.compare(password,user.password);
     console.log(result);
+    return {
+      user: {user:user.username},
+      success: result
+  }
   }
   
 }

@@ -7,7 +7,7 @@ export type PostDocument = HydratedDocument<Post>
 @Schema({ collection: 'blog-post'})
 export class Post implements IPost{
 
-    @Prop({required:true})
+    @Prop({required:true })
     authorName: string;
 
     @Prop({required:true})
